@@ -5,7 +5,7 @@ It checks your environment variables at build time, based on a predefined struct
 ## Install
 
 ```shell
-go get github.com/peterszarvas94/envloader@v1.0.7
+go get github.com/peterszarvas94/envloader@v1.0.8
 ```
 
 ## Usage
@@ -20,16 +20,21 @@ import (
   "github.com/peterszarvas94/envloader"
 )
 
+type Config struct {
+  DB_NAME string
+}
+var config Config
 
 func main() {
-  type Config struct {
-    DB_NAME string
-  }
-  var config Config
+  // optionally load env from file
+	file, err := os.Open(".env")
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+  envloader.File(file)
 
-  // optional
-  envloader.File(".env")
-
+  // check fields and load values to config
   err := envloader.Load(&config)
   if err != nil {
     fmt.Println(err)

@@ -8,17 +8,17 @@ import (
 	"strings"
 )
 
-var envPath string
+var envFile *os.File
 
-func File(path string) {
-	envPath = path
+func File(file *os.File) {
+	envFile = file
 }
 
 func Load(variables interface{}, keys ...string) error {
-	if envPath != "" {
-		err := loadEnvFromFile(envPath)
+	if envFile != nil {
+		err := loadEnvFromFile(envFile)
 		if err != nil {
-			return err
+			return fmt.Errorf("Error loading environment variables from file: %s", err)
 		}
 	}
 
@@ -50,14 +50,7 @@ func Load(variables interface{}, keys ...string) error {
 	return nil
 }
 
-func loadEnvFromFile(path string) error {
-	file, err := os.Open(path)
-	if err != nil {
-		return err
-	}
-
-	defer file.Close()
-
+func loadEnvFromFile(file *os.File) error {
 	var lines []string
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
