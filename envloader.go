@@ -14,7 +14,7 @@ func File(path string) {
 	envPath = path
 }
 
-func Loader(variables interface{}, keys ...string) error {
+func Load(variables interface{}, keys ...string) error {
 	if envPath != "" {
 		err := loadEnvFromFile(envPath)
 		if err != nil {
@@ -24,7 +24,7 @@ func Loader(variables interface{}, keys ...string) error {
 
 	v := reflect.ValueOf(variables)
 	if v.Kind() != reflect.Ptr || v.Elem().Kind() != reflect.Struct {
-		return fmt.Errorf("initEnv expects a pointer to a struct")
+		return fmt.Errorf("Load expects a pointer to a struct")
 	}
 
 	structValue := v.Elem()
