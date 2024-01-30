@@ -5,7 +5,7 @@ It checks your environment variables at build time, based on a predefined struct
 ## Install
 
 ```shell
-go get github.com/peterszarvas95/envloader@v1.0.5
+go get github.com/peterszarvas94/envloader@v1.0.5
 ```
 
 ## Usage
