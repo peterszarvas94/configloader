@@ -30,7 +30,7 @@ func main() {
   // optional
   envloader.File(".env")
 
-  err := envloader.Loader(&config)
+  err := envloader.Load(&config)
   if err != nil {
     fmt.Println(err)
     os.Exit(1)
