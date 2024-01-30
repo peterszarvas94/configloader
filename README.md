@@ -27,11 +27,11 @@ var config Config
 
 func main() {
   // optionally load env from file
-	file, err := os.Open(".env")
-	if err != nil {
-		return err
-	}
-	defer file.Close()
+  file, err := os.Open(".env")
+  if err != nil {
+    return err
+  }
+  defer file.Close()
   envloader.File(file)
 
   // check fields and load values to config
