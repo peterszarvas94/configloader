@@ -25,7 +25,7 @@ import (
 
   // E.g. you can use godotenv to load vars from .env file
   // It's not a dependency, you can define env vars as you wish
-  "github.com/joho/godotenv/autoload/"
+  _ "github.com/joho/godotenv/autoload/"
 )
 
 type Config struct {
